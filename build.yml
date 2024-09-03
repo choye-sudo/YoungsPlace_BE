@@ -7,6 +7,9 @@ phases:
     commands:
     - echo "Installing dependencies using Yarn..."
     - yarn install
+  pre_build:
+    commands:
+    - echo "Pre-build steps..." 
   build:
     commands:
     - echo "Building the React and Nest.js application..."
