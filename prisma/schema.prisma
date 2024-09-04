@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model ComplexInformation {
+  complex_name           String   @id @db.VarChar(50)
+  province               String?  @db.VarChar(100)
+  city                   String?  @db.VarChar(100)
+  address                String?  @db.VarChar(100)
+  household_number       String?  @db.VarChar(10)
+  heating_system         String?  @db.VarChar(20)
+  house_type             String?  @db.VarChar(10)
+  elevator               String?  @db.VarChar(10)
+  rental_business_operator String? @db.VarChar(10)
+  parkinglot_number      String?  @db.VarChar(10)
+  building_shape         String?  @db.VarChar(20)
+  building_completion_date String? @db.VarChar(20)
+
+  complexTypeInformation ComplexTypeInformation[]
+  subscriptionInformation SubscriptionInformation[]
+}
+
+model ComplexTypeInformation {
+  complex_name       String  @db.VarChar(50)
+  complex_type_name  String  @db.VarChar(10)
+  exclusive_area     String? @db.VarChar(10)
+  common_area        String? @db.VarChar(10)
+  supply_area        String? @db.VarChar(20)
+  deposit            String? @db.VarChar(20)
+  rent               String? @db.VarChar(20)
+  conversion_deposit String? @db.VarChar(10)
+
+  @@id([complex_name, complex_type_name])
+  complex ComplexInformation @relation(fields: [complex_name], references: [complex_name])
+}
+
+model SubscriptionInformation {
+  complex_name         String   @id @db.VarChar(50)
+  subscription_name    String?  @db.VarChar(50)
+  household_number_now String?  @db.VarChar(10)
+  start_date           String?  @db.VarChar(10)
+  end_date             String?  @db.VarChar(10)
+  estimated_month      String?  @db.VarChar(100)
+  recruitment_status   String?  @db.VarChar(10)
+  notification         String?  @db.VarChar(4000)
+  subscription_URL     String?  @db.VarChar(100)
+  
+  complex ComplexInformation @relation(fields: [complex_name], references: [complex_name])
+}
