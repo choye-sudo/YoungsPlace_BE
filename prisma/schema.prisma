@@ -8,38 +8,39 @@ datasource db {
 }
 
 model ComplexInformation {
-  complex_name           String   @id @db.VarChar(50)
-  province               String?  @db.VarChar(100)
-  city                   String?  @db.VarChar(100)
-  address                String?  @db.VarChar(100)
-  household_number       String?  @db.VarChar(10)
-  heating_system         String?  @db.VarChar(20)
-  house_type             String?  @db.VarChar(10)
-  elevator               String?  @db.VarChar(10)
-  rental_business_operator String? @db.VarChar(10)
-  parkinglot_number      String?  @db.VarChar(10)
-  building_shape         String?  @db.VarChar(20)
-  building_completion_date String? @db.VarChar(20)
+  complex_name           String   @id @db.VarChar(100)
+  province               String?  @db.VarChar(200)
+  city                   String?  @db.VarChar(200)
+  address                String?  @db.VarChar(200)
+  household_number       String?  @db.VarChar(20)
+  heating_system         String?  @db.VarChar(40)
+  house_type             String?  @db.VarChar(20)
+  elevator               String?  @db.VarChar(20)
+  rental_business_operator String? @db.VarChar(20)
+  parkinglot_number      String?  @db.VarChar(20)
+  building_shape         String?  @db.VarChar(40)
+  building_completion_date String? @db.VarChar(40)
 
   complexTypeInformation ComplexTypeInformation[]
   subscriptionInformation SubscriptionInformation[]
 }
 
 model ComplexTypeInformation {
-  complex_name       String  @db.VarChar(50)
-  complex_type_name  String  @db.VarChar(10)
-  exclusive_area     String? @db.VarChar(10)
-  common_area        String? @db.VarChar(10)
-  supply_area        String? @db.VarChar(20)
-  deposit            String? @db.VarChar(20)
-  rent               String? @db.VarChar(20)
-  conversion_deposit String? @db.VarChar(10)
+  complex_name       String  @db.VarChar(100)
+  complex_type_name  String  @db.VarChar(20)
+  exclusive_area     String? @db.VarChar(20)
+  common_area        String? @db.VarChar(20)
+  supply_area        String? @db.VarChar(40)
+  deposit            String? @db.VarChar(40)
+  rent               String? @db.VarChar(40)
+  conversion_deposit String? @db.VarChar(20)
 
   @@id([complex_name, complex_type_name])
   complex ComplexInformation @relation(fields: [complex_name], references: [complex_name])
 }
 
 model SubscriptionInformation {
+<<<<<<< Updated upstream
   complex_name         String   @id @db.VarChar(50)
   subscription_name    String?  @db.VarChar(50)
   household_number_now String?  @db.VarChar(10)
@@ -50,5 +51,16 @@ model SubscriptionInformation {
   notification         String?  @db.VarChar(4000)
   subscription_URL     String?  @db.VarChar(100)
   
+=======
+  complex_name         String   @id @db.VarChar(100)
+  subscription_name    String?  @db.VarChar(100)
+  household_number_now String?  @db.VarChar(20)
+  start_date           String?  @db.VarChar(20)
+  end_date             String?  @db.VarChar(20)
+  estimated_month      String?  @db.VarChar(200)
+  recruitment_status   String?  @db.VarChar(20)
+  notification         String?  @db.VarChar(5000)
+  subscription_URL     String?  @db.VarChar(200)
+>>>>>>> Stashed changes
   complex ComplexInformation @relation(fields: [complex_name], references: [complex_name])
 }
