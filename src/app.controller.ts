@@ -1,12 +1,20 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { ApiService } from './service/api.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(
+    private readonly apiService: ApiService,
+  ) {}
 
-  @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  @Get('/update-data')
+  async updateData() {
+    try {
+      await this.apiService.updateComplexInformation();
+      return 'Data updated successfully from API';
+    } catch (error) {
+      return `Error updating data from API: ${error.message}`;
+    }
   }
 }
+

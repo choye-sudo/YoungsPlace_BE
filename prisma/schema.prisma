@@ -49,6 +49,5 @@ model SubscriptionInformation {
   recruitment_status   String?  @db.VarChar(10)
   notification         String?  @db.VarChar(4000)
   subscription_URL     String?  @db.VarChar(100)
-  
   complex ComplexInformation @relation(fields: [complex_name], references: [complex_name])
 }
