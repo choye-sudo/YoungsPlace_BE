@@ -8,18 +8,18 @@ datasource db {
 }
 
 model ComplexInformation {
-  complex_name           String   @id @db.VarChar(50)
-  province               String?  @db.VarChar(100)
-  city                   String?  @db.VarChar(100)
-  address                String?  @db.VarChar(100)
-  household_number       String?  @db.VarChar(10)
-  heating_system         String?  @db.VarChar(20)
-  house_type             String?  @db.VarChar(10)
-  elevator               String?  @db.VarChar(10)
-  rental_business_operator String? @db.VarChar(10)
-  parkinglot_number      String?  @db.VarChar(10)
-  building_shape         String?  @db.VarChar(20)
-  building_completion_date String? @db.VarChar(20)
+  complex_name           String   @id @db.VarChar(100)
+  province               String?  @db.VarChar(200)
+  city                   String?  @db.VarChar(200)
+  address                String?  @db.VarChar(200)
+  household_number       String?  @db.VarChar(20)
+  heating_system         String?  @db.VarChar(40)
+  house_type             String?  @db.VarChar(20)
+  elevator               String?  @db.VarChar(20)
+  rental_business_operator String? @db.VarChar(20)
+  parkinglot_number      String?  @db.VarChar(20)
+  building_shape         String?  @db.VarChar(40)
+  building_completion_date String? @db.VarChar(40)
 
   complexTypeInformation ComplexTypeInformation[]
   subscriptionInformation SubscriptionInformation[]
