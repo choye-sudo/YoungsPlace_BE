@@ -8,7 +8,7 @@
     "allowSyntheticDefaultImports": true,
     "target": "ES2021",
     "sourceMap": true,
-    "outDir": "./node_modules",
+    "outDir": "./dist", //macOS : dist / window : node_modules
     "baseUrl": "./",
     "incremental": true,
     "skipLibCheck": true,

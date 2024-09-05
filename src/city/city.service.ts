@@ -5,7 +5,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class CityService {
     constructor(private prisma: PrismaService){}
 
-    async getCities(cityId: number) {
+    async getCities(city: string) {
         return this.prisma.complexTypeInformation.findMany({
             include: {
                 complex: {
