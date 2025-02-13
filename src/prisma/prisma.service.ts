@@ -4,10 +4,10 @@ import { PrismaClient } from '@prisma/client';
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
   async onModuleInit() {
-    await this.$connect();  // Prisma 클라이언트 연결
+    await this.$connect();
   }
 
   async onModuleDestroy() {
-    await this.$disconnect();  // Prisma 클라이언트 연결 해제
+    await this.$disconnect();
   }
 }

@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model House {
+  id             String  @id @db.VarChar(50)
+  leaseType      String? @db.VarChar(50)
+  location       String? @db.VarChar(100)
+  address        String? @db.VarChar(255)
+  complexName    String? @db.VarChar(100)
+  totalUnits     Int?
+  landlord       String? @db.VarChar(100)
+  completionDate DateTime?
+  buildingType   String? @db.VarChar(50)
+  heatingType    String? @db.VarChar(50)
+  elevator       Boolean?
+  parkingSpaces  Int?
+  housingInfo    String?
+  status         String? @db.VarChar(50)
+  applicationUrl String? @db.VarChar(255)
+
+  supplies HouseSupply[]
+  details  HouseDetails[]
+}
+
+model HouseSupply {
+  id                Int     @id @default(autoincrement())
+  houseId           String  @db.VarChar(50)
+  unitType          String? @db.VarChar(50)
+  privateArea       Decimal? @db.Decimal(10,2)
+  sharedArea        Decimal? @db.Decimal(10,2)
+  supplyArea        Decimal? @db.Decimal(10,2)
+  deposit          Decimal? @db.Decimal(15,2)
+  rent            Decimal? @db.Decimal(15,2)
+  conversionDeposit Decimal? @db.Decimal(15,2)
+  moveInDate       String? @db.VarChar(20)
+  supplySchedule   String?
+  currentSupplyUnits Int?
+
+  house House @relation(fields: [houseId], references: [id], onDelete: Cascade)
+}
+
+model HouseDetails {
+  id                Int     @id @default(autoincrement())
+  houseId           String  @db.VarChar(50)
+  notice           String?
+  department       String? @db.VarChar(200)
+  tenantCategory   String? @db.VarChar(100)
+  rentalTerms      String?
+  floorPlan        String? @db.VarChar(255)
+  deadline         DateTime?
+
+  house House @relation(fields: [houseId], references: [id], onDelete: Cascade)
+}

@@ -1,18 +1,13 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { DetailInfoController } from './detail_info.controller';
-import { AppService } from './app.service';
-import { PrismaService } from './prisma/prisma.service';
-import { DetailInfoService } from './detail_info.service';
-import { ProvinceModule } from './province/province.module';
-import { CityModule } from './city/city.module';
-import { RecruitmentStatusModule } from './recruitment-status/recruitment-status.module';
-import { PrismaModule } from './prisma/prisma.module';
-import { SaveModule } from './save/save.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { HousesModule } from './houses/houses.module';
+import { RedisModule } from './redis/redis.module';
 
 @Module({
-  imports: [ProvinceModule, CityModule, RecruitmentStatusModule, PrismaModule, SaveModule],
-  controllers: [AppController, DetailInfoController],
-  providers: [AppService, DetailInfoService, PrismaService],
+  imports: [
+    ScheduleModule.forRoot(), // 스케줄링 기능 추가
+    HousesModule,             // Houses 모듈 추가
+    RedisModule,              // Redis 모듈 추가
+  ],
 })
 export class AppModule {}
