@@ -1,0 +1,38 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    container_name: my_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - app_network
+
+  nestjs-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: my_nestjs_app
+    restart: always
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: "postgresql://myuser:mypassword@postgres:5432/mydatabase"
+    depends_on:
+      - postgres
+    ports:
+      - "3000:3000"
+    networks:
+      - app_network
+
+volumes:
+  pgdata:
+
+networks:
+  app_network:
